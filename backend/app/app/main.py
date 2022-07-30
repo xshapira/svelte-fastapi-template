@@ -7,11 +7,8 @@ from .config import settings
 
 
 SECRET = "SECRET"
-auth_backends = []
-
 jwt_authentication = JWTAuthentication(secret=settings.JWT_SECRET, lifetime_seconds=settings.JWT_LIFETIME, tokenUrl="/auth/jwt/login")
-auth_backends.append(jwt_authentication)
-
+auth_backends = [jwt_authentication]
 app = FastAPI()
 fastapi_users = FastAPIUsers(models.user_db, [jwt_authentication], schema.User, schema.UserCreate, schema.UserUpdate, schema.UserDB)
 
